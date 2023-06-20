@@ -1,0 +1,29 @@
+USE lista_de_tarefas;
+
+CREATE TABLE User (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Task (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    data_de_inicio DATE,
+    data_de_conclusao DATE,
+    prioridade INT(1),
+    estatus ENUM('andamento', 'concluído', 'não concluído', 'pendente') DEFAULT 'pendente',
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE List (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    concluida TINYINT(1) DEFAULT 0,
+    status VARCHAR(10) DEFAULT 'andamento',
+    user_id INT(11) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES User(id)
+);
